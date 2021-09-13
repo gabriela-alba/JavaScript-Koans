@@ -1,26 +1,33 @@
+const chalk = require("chalk");
 
 var __ = "incomplete";
 
 // ignore this. It simplifies determining array equality
-Array.prototype.equalTo = function(compareTo) {
-	if (this.length !== compareTo.length) {
-		return false;
-	}
-	for(var i = 0; i < compareTo.length; i++) {
-		if (this[i] !== compareTo[i]) {
-			return false;
-		}
-	}
-	return true;
+Array.prototype.equalTo = function (compareTo) {
+  if (this.length !== compareTo.length) {
+    return false;
+  }
+  for (var i = 0; i < compareTo.length; i++) {
+    if (this[i] !== compareTo[i]) {
+      return false;
+    }
+  }
+  return true;
 };
 
 const test = (message, assertion) => {
-	console.log('\x1b[31m\n')
-	assertion()
-	console.log('\x1b[0m\x1b[42m  %s  \x1b[0m\n', message)
-}
+  console.log("\x1b[31m\n");
+  assertion();
+  console.log(chalk.black.bgGreen(message));
 
-module.exports = { __, test }
+  // try{
+
+  // }catch(error){
+  // 	//console.log(chalk.black.bgRed(error))
+  // }
+};
+
+module.exports = { __, test };
 
 // (function() {
 
