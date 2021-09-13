@@ -16,15 +16,12 @@ Array.prototype.equalTo = function (compareTo) {
 };
 
 const test = (message, assertion) => {
-  console.log("\x1b[31m\n");
-  assertion();
-  console.log(chalk.black.bgGreen(message));
-
-  // try{
-
-  // }catch(error){
-  // 	//console.log(chalk.black.bgRed(error))
-  // }
+  try {
+    assertion();
+    console.log(chalk.white.bgGreen(message));
+  } catch (error) {
+    console.log(chalk.white.bgRed(error))
+  }
 };
 
 module.exports = { __, test };
