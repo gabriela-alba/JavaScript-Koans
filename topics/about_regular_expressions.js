@@ -13,12 +13,14 @@ const { __, test } = require('../support/koans')
 //     equal(__, containsSelect, 'does the string provided contain "select"?');
 // });
 
-test("match", () => {
+console.log('------Test regular expressions------')
+
+const match = test("match", () => {
     const matches = "what if 6 turned out to be 9?".match(/(\d)/g);
     ok(matches.equalTo(['6', '9']), 'what is the value of matches?');
 });
 
-test("replace", () => {
+const replace = test("replace", () => {
     let pie = "apple pie".replace("apple", "strawberry");
     equal('strawberry pie', pie, 'what is the value of pie?');
 
@@ -30,3 +32,5 @@ test("replace", () => {
 });
 
 // THE END
+
+module.exports = { match, replace };

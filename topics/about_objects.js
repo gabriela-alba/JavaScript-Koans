@@ -2,12 +2,14 @@
 const { equal } = require('assert')
 const { __, test } = require('../support/koans')
 
-test("object type", () => {
+console.log('------Test objects------')
+
+const object_type = test("object type", () => {
     const empty_object = {};
     equal('object', typeof(empty_object), 'what is the type of an object?');
 });
 
-test("object literal notation", () => {
+const object_literal = test("object literal notation", () => {
     const person = {
         name: "Amory Blaine",
         age: 102
@@ -16,7 +18,7 @@ test("object literal notation", () => {
     equal(102, person.age, "what is the person's age?");
 });
 
-test("ES6 object literal notation", () => {
+const object_literal_notation = test("ES6 object literal notation", () => {
     const name = "Amory Blaine"
     const age = 102
     
@@ -28,7 +30,7 @@ test("ES6 object literal notation", () => {
     equal(102, person.age, "what is the person's age?");
 });
 
-test("dynamically adding properties", () => {
+const dynamically_properties = test("dynamically adding properties", () => {
     const person = {};
     person.name = "Amory Blaine";
     person.age = 102;
@@ -36,7 +38,7 @@ test("dynamically adding properties", () => {
     equal(102, person.age, "what is the person's age?");
 }); 
 
-test("adding properties from strings", () => {
+const adding_properties = test("adding properties from strings", () => {
     const person = {};
     person["name"] = "Amory Blaine";
     person["age"] = 102;
@@ -44,7 +46,7 @@ test("adding properties from strings", () => {
     equal(102, person.age, "what is the person's age?");
 });
 
-test("adding functions", () => {
+const adding_functions = test("adding functions", () => {
     const person = {
         name: "Amory Blaine",
         age: 102,
@@ -54,3 +56,5 @@ test("adding functions", () => {
     };
     equal("I Amory Blaine am 102 years old.", person.toString(), "what should the toString function be?");
 });
+
+module.exports = { object_type, object_literal, object_literal_notation, dynamically_properties, adding_properties, adding_functions };

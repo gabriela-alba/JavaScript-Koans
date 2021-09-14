@@ -2,7 +2,9 @@
 const { equal } = require('assert')
 const { __, test } = require('../support/koans')
 
-test("defining functions directly", () => {
+console.log('------Test function and closure------')
+
+const defining_functions = test("defining functions directly", () => {
     let result = "a";
     function changeResult() {
         // the ability to access a variables defined in the same scope as the function is known as 'closure'
@@ -12,14 +14,14 @@ test("defining functions directly", () => {
     equal('b', result, 'what is the value of result?');
 });
 
-test("assigning functions to variables", () => {
+const assignig_functions = test("assigning functions to variables", () => {
     const triple = (input) => {
         return input * 3;
     };
     equal(12, triple(4), 'what is triple 4?');
 });
 
-test("self invoking functions", () => {
+const self_functions = test("self invoking functions", () => {
     const publicValue = "shared";
 
     // self invoking functions are used to provide scoping and to alias variables
@@ -34,7 +36,7 @@ test("self invoking functions", () => {
     equal("string", typeof(publicValue), "is publicValue available in this context?");
 });
 
-test("arguments array", () => {
+const arguments_arrays = test("arguments array", () => {
     const add = function() {
         let total = 0;
         for(let i = 0; i < arguments.length; i++) {
@@ -49,7 +51,7 @@ test("arguments array", () => {
     equal(9, add(4,7,-2), "add 4,7,-2");
 });
 
-test("using call to invoke function", () => {
+const invoke_function = test("using call to invoke function", () => {
     const invokee = function(message) {
         return this + message;    
     };
@@ -63,7 +65,7 @@ test("using call to invoke function", () => {
     equal('I am this! Where did it come from?', result, "what will the value of invokee's this be?");
 });
 
-test("using apply to invoke function", () => {
+const invoke_function_2 = test("using apply to invoke function", () => {
     const invokee = function(message1, message2) {
         return this + message1 + message2;    
     };
@@ -76,3 +78,4 @@ test("using apply to invoke function", () => {
     equal('I am this! I am arg1 I am arg2', result, "what will the value of invokee's this be?");
 });
 
+module.exports = { defining_functions, assignig_functions, self_functions, arguments_arrays, invoke_function, invoke_function_2 };

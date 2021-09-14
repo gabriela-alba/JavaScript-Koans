@@ -2,7 +2,9 @@
 const { equal } = require('assert')
 const { __, test } = require('../support/koans')
 
-test("'this' inside a method", () => {
+console.log('------Test this------')
+
+const inside_methods = test("'this' inside a method", () => {
 	const person = {
 		name: 'bob',
 		intro: function() {
@@ -12,7 +14,7 @@ test("'this' inside a method", () => {
 	equal(person.intro(), "Hello, my name is bob", "If an object has a method can you access properties inside it?");
 });
 
-test("'this' on unattached function", () => {
+const unattached_function = test("'this' on unattached function", () => {
 	const person = {
 		globalName: 'bob',
 		intro: function() {
@@ -28,7 +30,7 @@ test("'this' on unattached function", () => {
 	equal(alias(), "Hello, my name is Peter", "What does 'this' refer to when it is not part of an object?");
 });
 
-test("'this' set explicitly", () => {
+const set_explicitly = test("'this' set explicitly", () => {
 	const person = {
 		name: 'bob',
 		intro: function() {
@@ -44,3 +46,4 @@ test("'this' set explicitly", () => {
 // extra credit: underscore.js has a 'bind' function http://documentcloud.github.com/underscore/#bind
 // read the source and see how it is implemented
 
+module.exports = { inside_methods, unattached_function,set_explicitly };

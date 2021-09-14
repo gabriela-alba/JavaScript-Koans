@@ -14,7 +14,9 @@ Mammal.prototype = {
     }
 }
 
-test("defining a 'class'", () => {
+console.log('------Test prototypal inheritance------')
+
+const defining_class = test("defining a 'class'", () => {
     const eric  = new Mammal("Eric");
     equal('Hello, my name is Eric', eric.sayHi(), 'what will Eric say?');
 });
@@ -24,12 +26,12 @@ Mammal.prototype.favouriteSaying = function() {
     return this.name + "'s favourite saying is " + this.sayHi(); 
 }
 
-test("more functions", () => {
+const more_functions = test("more functions", () => {
     const bobby = new Mammal("Bobby");
     equal("Bobby's favourite saying is Hello, my name is Bobby", bobby.favouriteSaying(), "what is Bobby's favourite saying?"); 
 });
 
-test("calling functions added to a prototype after an object was created", function() {
+const calling_function = test("calling functions added to a prototype after an object was created", function() {
     var paul = new Mammal("Paul");
     Mammal.prototype.numberOfLettersInName = function() {
         return this.name.length;
@@ -54,8 +56,10 @@ function Bat(name, wingspan) {
 // configure inheritance
 extend(Bat, Mammal);
 
-test("Inheritance", () => {
+const inheritance = test("Inheritance", () => {
     var lenny = new Bat("Lenny", "1.5m");
     equal('Hello, my name is Lenny', lenny.sayHi(), "what does Lenny say?");
     equal("1.5m", lenny.wingspan, "what is Lenny's wingspan?");
 });
+
+module.exports = { defining_class, more_functions, calling_function, inheritance };

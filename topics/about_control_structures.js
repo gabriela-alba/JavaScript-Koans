@@ -2,7 +2,9 @@
 const { equal } = require('assert')
 const { __, test } = require('../support/koans')
 
-test("if", () => {
+console.log('------Test control structures------')
+
+const if_ = test("if", () => {
 	let isPositive = false;
 	if (2 > 0) {
 		isPositive = true;
@@ -10,7 +12,7 @@ test("if", () => {
 	equal(true, isPositive,  'what is the value of isPositive?');
 });
 
-test("for", () => {
+const for_ = test("for", () => {
 	let counter = 10;
 	for (let i = 1; i <= 3; i++) {
 		counter = counter + i;
@@ -18,7 +20,7 @@ test("for", () => {
 	equal(16, counter, 'what is the value of counter?');
 });
 
-test("for in", () => {
+const for_in_ = test("for in", () => {
 	// this syntax will be explained in about objects
 	const person = {
 		name: "Amory Blaine",
@@ -33,7 +35,7 @@ test("for in", () => {
 	equal("nameage", result, 'what is the value of result?');
 });
 
-test("ternary operator", () => {
+const ternary_operator = test("ternary operator", () => {
 	let fruit = true ? "apple" : "orange";
 	equal("apple", fruit, 'what is the value of fruit?');
 
@@ -41,7 +43,7 @@ test("ternary operator", () => {
 	equal("orange", fruit, 'now what is the value of fruit?');
 });
 
-test("switch", () => {
+const switch_ = test("switch", () => {
 	let result = 0;
 	switch (2) {
 		case 1:
@@ -54,7 +56,7 @@ test("switch", () => {
 	equal(2, result, 'what is the value of result?');
 });
 
-test("switch default case", () => {
+const switch_default = test("switch default case", () => {
     let result = "Pippin";
     switch ("m") {
         case "f":
@@ -70,7 +72,9 @@ test("switch default case", () => {
     equal("Merry", result, 'what is the value of result?');
 });
 
-test("null coalescing", () => {
+const null_coalescing = test("null coalescing", () => {
     let result = null || "a value";
     equal("a value", result, 'what is the value of result?');
 });
+
+module.exports = { if_, for_, for_in_, ternary_operator, switch_, switch_default, null_coalescing }

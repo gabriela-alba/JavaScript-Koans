@@ -12,14 +12,16 @@ function B() {
 
 B.prototype = new A();
 
-test("typeof", () => {
+console.log('------Test reflection------')
+
+const type_of = test("typeof", () => {
     equal('object', typeof({}), 'what is the type of an empty object?');
     equal('string', typeof('apple'), 'what is the type of a string?');
     equal('number', typeof(-5), 'what is the type of -5?');
     equal('boolean', typeof(false), 'what is the type of false?');
 });
 
-test("property enumeration", () => {
+const property_enumeration = test("property enumeration", () => {
     const keys = [];
     const values = [];
     const person = { 
@@ -37,7 +39,7 @@ test("property enumeration", () => {
     ok(values.equalTo(['Amory Blaine',102,true]), 'what are the property values of the object?');
 });
 
-test("hasOwnProperty", () => {
+const hasOwnProperty = test("hasOwnProperty", () => {
     const b = new B();
     let propertyName;
 
@@ -60,7 +62,7 @@ test("hasOwnProperty", () => {
     deepEqual(['bprop'], ownKeys, 'what are the own properties of the array?');
 });
 
-test("constructor property", () => {
+const constructor_property = test("constructor property", () => {
     const a = new A();
     const b = new B();
     equal('function', typeof(a.constructor), "what is the type of a's constructor?");
@@ -68,9 +70,11 @@ test("constructor property", () => {
     equal('A', b.constructor.name, "what is the name of b's constructor?");
 });
 
-test("eval", () => {
+const test_eval = test("eval", () => {
     // eval executes a string
     let result = "";
     eval("result = 'apple' + ' ' + 'pie'");
     equal('apple pie', result, 'what is the value of result?');
 });
+
+module.exports = { type_of, property_enumeration, hasOwnProperty, constructor_property, test_eval };
