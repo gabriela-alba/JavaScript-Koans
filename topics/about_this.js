@@ -4,46 +4,47 @@ const { __, test } = require('../support/koans')
 
 console.log('------Test this------')
 
-const inside_methods = test("'this' inside a method", () => {
-	const person = {
-		name: 'bob',
-		intro: function() {
-			return "Hello, my name is " + this.name;
-		} 
-	}
-	equal(person.intro(), "Hello, my name is bob", "If an object has a method can you access properties inside it?");
-});
+const tests = () => {
+	test("'this' inside a method", () => {
+		const person = {
+			name: 'bob',
+			intro: function() {
+				return "Hello, my name is " + this.name;
+			} 
+		}
+		equal(person.intro(), "Hello, my name is bob", "If an object has a method can you access properties inside it?");
+	});
 
-const unattached_function = test("'this' on unattached function", () => {
-	const person = {
-		globalName: 'bob',
-		intro: function() {
-			return "Hello, my name is " + this.globalName;
-		} 
-	}
+	test("'this' on unattached function", () => {
+		const person = {
+			globalName: 'bob',
+			intro: function() {
+				return "Hello, my name is " + this.globalName;
+			} 
+		}
 
-	const alias = person.intro;
-	
-	// if the function is not called as an object property 'this' is the global context 
-	// (window in a browser). This is an example. Please do not do this in practise.
-	global.globalName = 'Peter';
-	equal(alias(), "Hello, my name is Peter", "What does 'this' refer to when it is not part of an object?");
-});
+		const alias = person.intro;
+		
+		// if the function is not called as an object property 'this' is the global context 
+		// (window in a browser). This is an example. Please do not do this in practise.
+		global.globalName = 'Peter';
+		equal(alias(), "Hello, my name is Peter", "What does 'this' refer to when it is not part of an object?");
+	});
 
-const set_explicitly = test("'this' set explicitly", () => {
-	const person = {
-		name: 'bob',
-		intro: function() {
-			return "Hello, my name is " + this.name;
-		} 
-	}
+	test("'this' set explicitly", () => {
+		const person = {
+			name: 'bob',
+			intro: function() {
+				return "Hello, my name is " + this.name;
+			} 
+		}
 
-	// calling a function with 'call' lets us assign 'this' explicitly
-	const message = person.intro.call({ name: "Frank" });
-	equal(message, "Hello, my name is Frank", "What does 'this' refer to when you use the 'call()' method?");
-});
-
+		// calling a function with 'call' lets us assign 'this' explicitly
+		const message = person.intro.call({ name: "Frank" });
+		equal(message, "Hello, my name is Frank", "What does 'this' refer to when you use the 'call()' method?");
+	});
+}
 // extra credit: underscore.js has a 'bind' function http://documentcloud.github.com/underscore/#bind
 // read the source and see how it is implemented
 
-module.exports = { inside_methods, unattached_function,set_explicitly };
+module.exports = tests

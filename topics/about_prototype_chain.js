@@ -30,36 +30,38 @@ child.b = 2;
 
 console.log('------Test prototype chain------')
 
-const property_child = test("Is there an 'a' and 'b' own property on child?", () => {
-  equal(true, child.hasOwnProperty("a"), "child.hasOwnProperty('a')?");
-  equal(true, child.hasOwnProperty("b"), "child.hasOwnProperty('b')?");
-});
+const tests = () => {
+    test("Is there an 'a' and 'b' own property on child?", () => {
+      equal(true, child.hasOwnProperty("a"), "child.hasOwnProperty('a')?");
+      equal(true, child.hasOwnProperty("b"), "child.hasOwnProperty('b')?");
+    });
 
-const property_child_value = test("Is there an 'a' and 'b' property on child?", () => {
-  equal(1, child.a, "what is 'a' value?");
-  equal(2, child.b, "what is 'b' value?");
-});
+    test("Is there an 'a' and 'b' property on child?", () => {
+      equal(1, child.a, "what is 'a' value?");
+      equal(2, child.b, "what is 'b' value?");
+    });
 
-const property_delete_value = test("If 'b' was removed, whats b value?", () => {
-  delete child.b;
-  equal(3, child.b, "what is 'b' value now?");
-});
+    test("If 'b' was removed, whats b value?", () => {
+      delete child.b;
+      equal(3, child.b, "what is 'b' value now?");
+    });
 
-const property_hasOwnProperty = test("Is there a 'c' own property on child?", () => {
-  equal(false, child.hasOwnProperty("c"), "child.hasOwnProperty('c')?");
-});
+    test("Is there a 'c' own property on child?", () => {
+      equal(false, child.hasOwnProperty("c"), "child.hasOwnProperty('c')?");
+    });
 
-// Is there a 'c' own property on child? No, check its prototype
-// Is there a 'c' own property on child.[[Prototype]]? Yes, its value is...
-const child_value_c = test("Is there a 'c' property on child?", () => {
-  equal(4, child.c, "what is the value of child.c?");
-});
+    // Is there a 'c' own property on child? No, check its prototype
+    // Is there a 'c' own property on child.[[Prototype]]? Yes, its value is...
+    test("Is there a 'c' property on child?", () => {
+      equal(4, child.c, "what is the value of child.c?");
+    });
 
-// Is there a 'd' own property on child? No, check its prototype
-// Is there a 'd' own property on child.[[Prototype]]? No, check it prototype
-// child.[[Prototype]].[[Prototype]] is null, stop searching, no property found, return...
-const child_value_d = test("Is there an 'd' property on child?", () => {
-  equal(undefined, child.d, "what is the value of child.d?");
-});
+    // Is there a 'd' own property on child? No, check its prototype
+    // Is there a 'd' own property on child.[[Prototype]]? No, check it prototype
+    // child.[[Prototype]].[[Prototype]] is null, stop searching, no property found, return...
+    test("Is there an 'd' property on child?", () => {
+      equal(undefined, child.d, "what is the value of child.d?");
+    });
+}
 
-module.exports ={ property_child, property_child_value, property_delete_value, property_hasOwnProperty, child_value_c, child_value_d };
+module.exports = tests 

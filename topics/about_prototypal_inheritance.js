@@ -16,50 +16,53 @@ Mammal.prototype = {
 
 console.log('------Test prototypal inheritance------')
 
-const defining_class = test("defining a 'class'", () => {
-    const eric  = new Mammal("Eric");
-    equal('Hello, my name is Eric', eric.sayHi(), 'what will Eric say?');
-});
+const tests = () => {
+    test("defining a 'class'", () => {
+        const eric  = new Mammal("Eric");
+        equal('Hello, my name is Eric', eric.sayHi(), 'what will Eric say?');
+    });
 
-// add another function to the Mammal 'type' that uses the sayHi function
-Mammal.prototype.favouriteSaying = function() {
-    return this.name + "'s favourite saying is " + this.sayHi(); 
+    // add another function to the Mammal 'type' that uses the sayHi function
+    Mammal.prototype.favouriteSaying = function() {
+        return this.name + "'s favourite saying is " + this.sayHi(); 
+    }
+
+    test("more functions", () => {
+        const bobby = new Mammal("Bobby");
+        equal("Bobby's favourite saying is Hello, my name is Bobby", bobby.favouriteSaying(), "what is Bobby's favourite saying?"); 
+    });
+
+    test("calling functions added to a prototype after an object was created", function() {
+        var paul = new Mammal("Paul");
+        Mammal.prototype.numberOfLettersInName = function() {
+            return this.name.length;
+        };
+        // the following statement asks the paul object to call a function that was added
+        // to the Mammal prototype after paul was constructed.
+        equal(4, paul.numberOfLettersInName(), "how long is Paul's name?");
+    });
+
+    // helper function for inheritance. 
+    // From https://developer.mozilla.org/en/JavaScript/Guide/Inheritance_Revisited
+    function extend(child, supertype) {  
+        child.prototype = supertype.prototype;  
+    } 
+
+    // "Subclass" Mammal
+    function Bat(name, wingspan) {
+        Mammal.call(this, name);
+        this.wingspan = wingspan;
+    }	
+
+    // configure inheritance
+    extend(Bat, Mammal);
+
+    test("Inheritance", () => {
+        var lenny = new Bat("Lenny", "1.5m");
+        equal('Hello, my name is Lenny', lenny.sayHi(), "what does Lenny say?");
+        equal("1.5m", lenny.wingspan, "what is Lenny's wingspan?");
+    });
+
 }
 
-const more_functions = test("more functions", () => {
-    const bobby = new Mammal("Bobby");
-    equal("Bobby's favourite saying is Hello, my name is Bobby", bobby.favouriteSaying(), "what is Bobby's favourite saying?"); 
-});
-
-const calling_function = test("calling functions added to a prototype after an object was created", function() {
-    var paul = new Mammal("Paul");
-    Mammal.prototype.numberOfLettersInName = function() {
-        return this.name.length;
-    };
-    // the following statement asks the paul object to call a function that was added
-    // to the Mammal prototype after paul was constructed.
-    equal(4, paul.numberOfLettersInName(), "how long is Paul's name?");
-});
-
-// helper function for inheritance. 
-// From https://developer.mozilla.org/en/JavaScript/Guide/Inheritance_Revisited
-function extend(child, supertype) {  
-    child.prototype = supertype.prototype;  
-} 
-
-// "Subclass" Mammal
-function Bat(name, wingspan) {
-    Mammal.call(this, name);
-    this.wingspan = wingspan;
-}	
-
-// configure inheritance
-extend(Bat, Mammal);
-
-const inheritance = test("Inheritance", () => {
-    var lenny = new Bat("Lenny", "1.5m");
-    equal('Hello, my name is Lenny', lenny.sayHi(), "what does Lenny say?");
-    equal("1.5m", lenny.wingspan, "what is Lenny's wingspan?");
-});
-
-module.exports = { defining_class, more_functions, calling_function, inheritance };
+module.exports = tests

@@ -6,22 +6,24 @@ console.log('------Test scope------')
 
 thisIsAGlobalVariable = 77;
 
-const global_variables = test("global variables", () => {
-    equal(77, thisIsAGlobalVariable, 'is thisIsAGlobalVariable defined in this scope?');
-});
+const tests = () => {
+    test("global variables", () => {
+        equal(77, thisIsAGlobalVariable, 'is thisIsAGlobalVariable defined in this scope?');
+    });
 
-const variables = test("variables declared inside of a function", () => {
-    let outerVariable = "outer";
+    test("variables declared inside of a function", () => {
+        let outerVariable = "outer";
 
-    // this is a self-invoking function. Notice that it calls itself at the end ().
-    (function() {
-        let innerVariable = "inner";
+        // this is a self-invoking function. Notice that it calls itself at the end ().
+        (function() {
+            let innerVariable = "inner";
+            equal("outer", outerVariable, 'is outerVariable defined in this scope?');
+            equal("inner", innerVariable, 'is innerVariable defined in this scope?');
+        })();
+
         equal("outer", outerVariable, 'is outerVariable defined in this scope?');
-        equal("inner", innerVariable, 'is innerVariable defined in this scope?');
-    })();
+        equal('undefined', typeof(innerVariable), 'is innerVariable defined in this scope?');
+    });
+}
 
-    equal("outer", outerVariable, 'is outerVariable defined in this scope?');
-    equal('undefined', typeof(innerVariable), 'is innerVariable defined in this scope?');
-});
-
-module.exports = { global_variables, variables };
+module.exports = tests

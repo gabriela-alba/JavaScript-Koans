@@ -4,18 +4,20 @@ const { __, test } = require('../support/koans')
 
 console.log('------Test numbers------')
 
-const types = test("types", () => {
-    const typeOfIntegers = typeof(6);
-    const typeOfFloats = typeof(3.14159);
-    equal(true, typeOfIntegers === typeOfFloats, 'are ints and floats the same type?');
-    equal('number', typeOfIntegers, 'what is the javascript numeric type?');
-    equal(1, 1.0, 'what is a integer number equivalent to 1.0?');
-});
+const tests = () => {
+    test("types", () => {
+        const typeOfIntegers = typeof(6);
+        const typeOfFloats = typeof(3.14159);
+        equal(true, typeOfIntegers === typeOfFloats, 'are ints and floats the same type?');
+        equal('number', typeOfIntegers, 'what is the javascript numeric type?');
+        equal(1, 1.0, 'what is a integer number equivalent to 1.0?');
+    });
 
-const number_NAN = test("NaN", () => {
-    const resultOfFailedOperations = 7/'apple';
-    equal(true, Number.isNaN(resultOfFailedOperations), 'what will satisfy the equals assertion?');
-    equal(false, resultOfFailedOperations == NaN, 'is NaN == NaN?');
-});
+    test("NaN", () => {
+        const resultOfFailedOperations = 7/'apple';
+        equal(true, Number.isNaN(resultOfFailedOperations), 'what will satisfy the equals assertion?');
+        equal(false, resultOfFailedOperations == NaN, 'is NaN == NaN?');
+    });
+}
 
-module.exports = { types, number_NAN };
+module.exports = tests 

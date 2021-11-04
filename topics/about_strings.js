@@ -4,36 +4,38 @@ const { __, test } = require('../support/koans')
 
 console.log('------Test string------')
 
-const delimiters = test("delimiters", () => {
-    const singleQuotedString = 'apple';
-    const doubleQuotedString = "apple";
-    equal(true, singleQuotedString === doubleQuotedString, 'are the two strings equal?');
-});
+const tests = () => {
+    test("delimiters", () => {
+        const singleQuotedString = 'apple';
+        const doubleQuotedString = "apple";
+        equal(true, singleQuotedString === doubleQuotedString, 'are the two strings equal?');
+    });
 
-const concatenation = test("concatenation", () => {
-    const fruit = "apple";
-    const dish = "pie";
-    equal("apple pie", fruit + " " + dish, 'what is the value of fruit + " " + dish?');
-});
+    test("concatenation", () => {
+        const fruit = "apple";
+        const dish = "pie";
+        equal("apple pie", fruit + " " + dish, 'what is the value of fruit + " " + dish?');
+    });
 
-const character_type = test("character Type", () => {
-    const characterType = typeof("Amory".charAt(1)); // typeof will be explained in about reflection
-    equal('string', characterType, 'Javascript has no character type');
-});
+    test("character Type", () => {
+        const characterType = typeof("Amory".charAt(1)); // typeof will be explained in about reflection
+        equal('string', characterType, 'Javascript has no character type');
+    });
 
-const escape_character = test("escape character", () => {
-    const stringWithAnEscapedCharacter  = "\u0041pple";
-    equal('Apple', stringWithAnEscapedCharacter, 'what  is the value of stringWithAnEscapedCharacter?');
-});
+    test("escape character", () => {
+        const stringWithAnEscapedCharacter  = "\u0041pple";
+        equal('Apple', stringWithAnEscapedCharacter, 'what  is the value of stringWithAnEscapedCharacter?');
+    });
 
-const string_length = test("string.length", () => {
-    const fruit = "apple";
-    equal(5, fruit.length, 'what is the value of fruit.length?');
-});
+    test("string.length", () => {
+        const fruit = "apple";
+        equal(5, fruit.length, 'what is the value of fruit.length?');
+    });
 
-const slice = test("slice", () => {
-    const fruit = "apple pie";
-    equal('apple', fruit.slice(0,5), 'what is the value of fruit.slice(0,5)?');
-});
+    test("slice", () => {
+        const fruit = "apple pie";
+        equal('apple', fruit.slice(0,5), 'what is the value of fruit.slice(0,5)?');
+    });
+}
 
-module.exports = { delimiters, concatenation, character_type, escape_character, string_length, slice };
+module.exports = tests 
